@@ -5,36 +5,41 @@ import edu.eci.ieti.tasks.entities.User;
 import edu.eci.ieti.tasks.service.UserService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 import java.util.HashMap;
 import java.util.List;
 
 @Service
 public class UserServiceHashMap implements UserService {
-    HashMap users = new HashMap();
+    HashMap <String, User> users = new HashMap();
 
     @Override
     public User create(User user) {
         users.put(user.getId(),user);
-        return null;
+        return users.get(user.getId()) ;
     }
 
     @Override
     public User findById(String id) {
-        return null;
+        return users.get(id);
     }
 
     @Override
     public List<User> getAll() {
-        return null;
+        List<User> listUsers = new ArrayList<>(users.values());
+        return listUsers;
     }
 
     @Override
-    public void deleteById(String id) {
-
+    public void deleteById(String id){
+        users.remove(id);
     }
 
     @Override
     public User update(User user, String userId) {
-        return null;
+        users.replace(userId, user);
+        return users.get(userId);
     }
 }

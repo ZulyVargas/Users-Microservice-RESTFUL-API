@@ -16,15 +16,15 @@ public class User {
         this.createdAt = LocalDate.now().toString();
     }
 
-    public User(String name, String lastName, String email){
+    public User(String name, String email, String lastName){
         this();
         this.name = name;
         this.lastName = lastName;
         this.email = email;
     }
 
-    public User(String id,String name, String lastName, String email, String createdAt){
-        this(name, lastName, email);
+    public User(String id,String name, String email, String lastName, String createdAt){
+        this(name, email, lastName);
         this.id = id;
         this.createdAt = createdAt;
     }
@@ -57,14 +57,13 @@ public class User {
         return lastName;
     }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
 
     public String getCreatedAt() {
         return createdAt;
     }
-
-
-
-
-
 
 }

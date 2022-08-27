@@ -1,9 +1,70 @@
 package edu.eci.ieti.tasks.entities;
 
+import java.time.LocalDate;
+
 public class User {
+
     String id;
     String name;
     String email;
     String lastName;
     String createdAt;
+
+
+    public User(){
+        this.id = String.valueOf((int)(Math.random()*9));
+        this.createdAt = LocalDate.now().toString();
+    }
+
+    public User(String name, String lastName, String email){
+        this();
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
+    public User(String id,String name, String lastName, String email, String createdAt){
+        this(name, lastName, email);
+        this.id = id;
+        this.createdAt = createdAt;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+
+
+
+
+
 }

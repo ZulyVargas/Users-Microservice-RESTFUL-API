@@ -14,6 +14,7 @@ public class UserServiceHashMap implements UserService {
 
     @Override
     public User create(User user) {
+        users.put(user.getId(),user);
         return null;
     }
 

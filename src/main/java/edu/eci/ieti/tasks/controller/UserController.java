@@ -31,42 +31,62 @@ public class UserController {
 
         ModelMapper modelMapper = new ModelMapper();
         List<UserDto> usersDTO = new ArrayList<>();
-        List<User> userList = userService.getAll();
+        try {
+            List<User> userList = userService.getAll();
 
-        for (User user : userList) {
-            usersDTO.add(modelMapper.map(user, UserDto.class));
+            for (User user : userList) {
+                usersDTO.add(modelMapper.map(user, UserDto.class));
+            }
+            return new ResponseEntity<>(usersDTO, HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(usersDTO, HttpStatus.ACCEPTED);
     }
 
 
     @GetMapping( "/{id}" )
     public ResponseEntity<UserDto> findById(@PathVariable String id ) {
-        ModelMapper modelMapper = new ModelMapper();
-        userService.findById(id);
-        return new ResponseEntity<>(modelMapper.map(userService.findById(id),UserDto.class), HttpStatus.ACCEPTED);
+        try {
+            ModelMapper modelMapper = new ModelMapper();
+            userService.findById(id);
+            return new ResponseEntity<>(modelMapper.map(userService.findById(id), UserDto.class), HttpStatus.ACCEPTED);
+        }catch(Exception e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
-
 
     @PostMapping
     public ResponseEntity<UserDto> create( @RequestBody UserDto userDto ) {
-        ModelMapper modelMapper = new ModelMapper();
-        userService.create(modelMapper.map(userDto,User.class));
-        return new ResponseEntity<>(userDto, HttpStatus.ACCEPTED);
+        try {
+            ModelMapper modelMapper = new ModelMapper();
+            userService.create(modelMapper.map(userDto, User.class));
+            return new ResponseEntity<>(userDto, HttpStatus.ACCEPTED);
+        } catch(Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping( "/{id}" )
     public ResponseEntity<UserDto> update( @RequestBody UserDto user, @PathVariable String id ) {
-        ModelMapper modelMapper = new ModelMapper();
-        userService.update(modelMapper.map(user,User.class), id);
-        return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
+        try {
+            ModelMapper modelMapper = new ModelMapper();
+            userService.update(modelMapper.map(user, User.class), id);
+            return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
+        } catch(Exception e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping( "/{id}" )
     public ResponseEntity<Boolean> delete( @PathVariable String id ) {
-        userService.deleteById(id);
-        return new ResponseEntity<>(true , HttpStatus.ACCEPTED);
+        try {
+            userService.deleteById(id);
+            return new ResponseEntity<>(true , HttpStatus.ACCEPTED);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
+
 
 
 

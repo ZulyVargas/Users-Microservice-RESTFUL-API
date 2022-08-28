@@ -83,7 +83,7 @@ public class UserController {
             userService.deleteById(id);
             return new ResponseEntity<>(true , HttpStatus.ACCEPTED);
         } catch (Exception e){
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
         }
     }
 
